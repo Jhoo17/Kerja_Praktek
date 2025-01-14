@@ -8,9 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
 </head>
 <body>
     <nav class="navbar">
+        <div class="nav-brand">Kampung Demini</div>
+        <button class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
         <div class="nav-links">
             <a href="#beranda">Beranda</a>
             <a href="#tentang">Tentang</a>
@@ -114,25 +121,43 @@
         <h2 class="section-title">Lokasi Kampung Demini</h2>
         <div class="map-container">
             <div class="map-info">
-                <h3>Informasi Lokasi:</h3>
-                <ul class="map-legend">
-                    <li><i class="fas fa-map-marker-alt"></i> Distrik Momiwaren</li>
-                    <li><i class="fas fa-mountain"></i> Kabupaten Manokwari Selatan</li>
-                    <li><i class="fas fa-compass"></i> Provinsi Papua Barat</li>
-                </ul>
-                <p class="map-description">
-                    Kampung Demini terletak di wilayah Distrik Momiwaren, dapat diakses melalui jalur darat dari kota Manokwari.
-                </p>
+                <h3>Informasi Lokasi</h3>
+                <div class="location-details">
+                    <div class="location-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Alamat</h4>
+                            <p>Kampung Demini, Distrik Momiwaren</p>
+                            <p>Kabupaten Manokwari Selatan</p>
+                            <p>Provinsi Papua Barat</p>
+                        </div>
+                    </div>
+                    <div class="location-item">
+                        <i class="fas fa-route"></i>
+                        <div>
+                            <h4>Akses</h4>
+                            <p>Dapat diakses melalui:</p>
+                            <ul>
+                                <li>Jalur darat dari Kota Manokwari</li>
+                                <li>Transportasi umum tersedia</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="location-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <h4>Fasilitas Terdekat</h4>
+                            <ul>
+                                <li>Puskesmas Pembantu</li>
+                                <li>Sekolah Dasar</li>
+                                <li>Balai Kampung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="map-frame">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127627.50368321064!2d134.00682053777842!3d-1.549446848322191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d52154e51f10e51%3A0x333d707a894bdb79!2sDemini%2C%20Distrik%20Momi%20Waren%2C%20Kab.%20Manokwari%20Selatan%2C%20Papua%20Bar.!5e0!3m2!1sid!2sid!4v1736828174167!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    width="100%" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy">
-                </iframe>
+                <div id="map"></div>
             </div>
         </div>
     </section>
@@ -199,5 +224,39 @@
             <button class="btn modal-btn">Jelajahi Sekarang</button>
         </div>
     </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Inisialisasi peta
+        const map = L.map('map').setView([-1.5891744, 133.0657391], 13);
+
+        // Tambahkan tile layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Tambahkan marker untuk lokasi Kampung Demini
+        const marker = L.marker([-1.5891744, 133.0657391])
+            .addTo(map)
+            .bindPopup(`
+                <div class="map-popup">
+                    <h3>Kampung Demini</h3>
+                    <p>Distrik Momiwaren, Manokwari Selatan</p>
+                    <p>Papua Barat</p>
+                </div>
+            `);
+
+        // Tambahkan circle untuk area kampung
+        L.circle([-1.5891744, 133.0657391], {
+            color: '#4a6741',
+            fillColor: '#4a6741',
+            fillOpacity: 0.2,
+            radius: 1000
+        }).addTo(map);
+    });
+    </script>
 </body>
 </html>

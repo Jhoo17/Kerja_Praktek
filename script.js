@@ -47,23 +47,6 @@ window.addEventListener('load', () => {
     }, 500);
 });
 
-const backToTop = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTop.style.display = 'flex';
-    } else {
-        backToTop.style.display = 'none';
-    }
-});
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
 const observerOptions = {
     threshold: 0.5
 };
@@ -88,17 +71,20 @@ function openLightbox(element) {
     
     lightboxImg.src = imgSrc;
     lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Mencegah scroll
-
+    document.body.style.overflow = 'hidden';
+    
     // Simpan referensi ke gallery item saat ini
-    lightbox.dataset.currentIndex = Array.from(document.querySelectorAll('.gallery-item')).indexOf(element);
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    lightbox.dataset.currentIndex = Array.from(galleryItems).indexOf(element);
 }
 
 // Fungsi untuk menutup lightbox
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
-    lightbox.style.display = 'none';
-    document.body.style.overflow = ''; // Mengembalikan scroll
+    if (lightbox) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+    }
 }
 
 // Fungsi untuk navigasi lightbox
@@ -125,36 +111,86 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
 
-    // Event untuk tombol close
-    closeBtn.onclick = (e) => {
-        e.stopPropagation();
-        closeLightbox();
-    };
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeLightbox();
+        });
+    }
 
-    // Event untuk tombol navigasi
-    prevBtn.onclick = (e) => {
-        e.stopPropagation();
-        navigateLightbox(-1);
-    };
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navigateLightbox(-1);
+        });
+    }
 
-    nextBtn.onclick = (e) => {
-        e.stopPropagation();
-        navigateLightbox(1);
-    };
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navigateLightbox(1);
+        });
+    }
 
     // Menutup lightbox saat klik di luar gambar
-    lightbox.onclick = (e) => {
-        if (e.target === lightbox) {
-            closeLightbox();
-        }
-    };
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
 
     // Navigasi dengan keyboard
-    document.onkeydown = (e) => {
-        if (lightbox.style.display === 'flex') {
+    document.addEventListener('keydown', (e) => {
+        if (lightbox && lightbox.style.display === 'flex') {
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') navigateLightbox(-1);
             if (e.key === 'ArrowRight') navigateLightbox(1);
         }
+    });
+});
+
+// Modal functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('infoModal');
+    const closeBtn = document.querySelector('.modal-close');
+    const modalBtn = document.querySelector('.modal-btn');
+
+    // Tampilkan modal setelah 2 detik halaman dimuat
+    setTimeout(() => {
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+    }, 2000);
+
+    // Tutup modal saat tombol close diklik
+    closeBtn.onclick = () => {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
     };
+
+    // Tutup modal saat tombol "Jelajahi Sekarang" diklik
+    modalBtn.onclick = () => {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    };
+
+    // Tutup modal saat mengklik di luar modal
+    window.onclick = (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+    };
+
+    // Tutup modal dengan tombol ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+    });
 });

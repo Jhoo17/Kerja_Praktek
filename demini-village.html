@@ -171,9 +171,9 @@
     <script src="script.js"></script>
 
     <div id="lightbox" class="lightbox-modal">
-        <button class="close-lightbox" title="Close">×</button>
-        <button class="lightbox-prev" title="Previous">←</button>
-        <button class="lightbox-next" title="Next">→</button>
+        <button class="close-lightbox" title="Close">&times;</button>
+        <button class="lightbox-prev" title="Previous">&larr;</button>
+        <button class="lightbox-next" title="Next">&rarr;</button>
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Lightbox image">
         </div>
@@ -188,8 +188,16 @@
         </div>
     </div>
 
-    <button id="backToTop" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Selamat Datang di Kampung Demini</h2>
+            <div class="modal-body">
+                <p>Kampung Demini adalah salah satu kampung yang terletak di Distrik Momiwaren, Kabupaten Manokwari Selatan, Provinsi Papua Barat.</p>
+                <p>Website ini dibuat untuk memperkenalkan keindahan alam dan kekayaan budaya Kampung Demini kepada dunia.</p>
+            </div>
+            <button class="btn modal-btn">Jelajahi Sekarang</button>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kampung Demini - Warisan Budaya Papua</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#beranda">Beranda</a>
+            <a href="#tentang">Tentang</a>
+            <a href="#budaya">Budaya</a>
+            <a href="#galeri">Galeri</a>
+            <a href="#denah">Denah</a>
+            <a href="#kontak">Kontak</a>
+        </div>
+    </nav>
+
+    <section id="beranda" class="hero">
+        <div class="hero-content">
+            <h1>Selamat Datang di Kampung Demini</h1>
+            <p>Jelajahi keindahan dan kearifan lokal Papua</p>
+            <a href="#tentang" class="btn">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <section id="tentang" class="section">
+        <h2 class="section-title">Tentang Kampung Demini</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300" alt="Kampung Demini">
+                <div class="gallery-item-content">
+                    <h3>Sejarah</h3>
+                    <p>Kampung Demini memiliki sejarah panjang sebagai pusat kebudayaan suku Dani.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300" alt="Kehidupan Sehari-hari">
+                <div class="gallery-item-content">
+                    <h3>Kehidupan Sehari-hari</h3>
+                    <p>Masyarakat Demini hidup dengan harmonis menjaga kearifan lokal.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300" alt="Alam Demini">
+                <div class="gallery-item-content">
+                    <h3>Alam yang Indah</h3>
+                    <p>Dikelilingi pegunungan dan hutan yang masih asri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="budaya" class="section">
+        <h2 class="section-title">Budaya Kami</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/301" alt="Tarian Tradisional">
+                <div class="gallery-item-content">
+                    <h3>Tarian Tradisional</h3>
+                    <p>Tarian adat yang diwariskan turun-temurun sebagai bentuk ekspresi budaya.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/302" alt="Kerajinan Tangan">
+                <div class="gallery-item-content">
+                    <h3>Kerajinan Tangan</h3>
+                    <p>Berbagai kerajinan tangan khas Papua yang dibuat dengan keahlian tinggi.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/303" alt="Upacara Adat">
+                <div class="gallery-item-content">
+                    <h3>Upacara Adat</h3>
+                    <p>Ritual dan upacara adat yang masih terjaga kelestariannya.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeri" class="section">
+        <h2 class="section-title">Galeri Foto</h2>
+        <div class="gallery">
+            <div class="gallery-item no-zoom" onclick="openLightbox(this)">
+                <img src="https://picsum.photos/400/304" alt="Pemandangan Alam">
+                <div class="gallery-item-content">
+                    <h3>Pemandangan Alam</h3>
+                    <p>Keindahan alam Kampung Demini yang memukau.</p>
+                </div>
+            </div>
+            <div class="gallery-item no-zoom" onclick="openLightbox(this)">
+                <img src="https://picsum.photos/400/305" alt="Kehidupan Masyarakat">
+                <div class="gallery-item-content">
+                    <h3>Kehidupan Masyarakat</h3>
+                    <p>Potret keseharian masyarakat Kampung Demini.</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/306" alt="Festival Budaya">
+                <div class="gallery-item-content">
+                    <h3>Festival Budaya</h3>
+                    <p>Momen-momen festival budaya yang meriah.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="denah" class="section map-section">
+        <h2 class="section-title">Lokasi Kampung Demini</h2>
+        <div class="map-container">
+            <div class="map-info">
+                <h3>Informasi Lokasi:</h3>
+                <ul class="map-legend">
+                    <li><i class="fas fa-map-marker-alt"></i> Distrik Momiwaren</li>
+                    <li><i class="fas fa-mountain"></i> Kabupaten Manokwari Selatan</li>
+                    <li><i class="fas fa-compass"></i> Provinsi Papua Barat</li>
+                </ul>
+                <p class="map-description">
+                    Kampung Demini terletak di wilayah Distrik Momiwaren, dapat diakses melalui jalur darat dari kota Manokwari.
+                </p>
+            </div>
+            <div class="map-frame">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127627.50368321064!2d134.00682053777842!3d-1.549446848322191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d52154e51f10e51%3A0x333d707a894bdb79!2sDemini%2C%20Distrik%20Momi%20Waren%2C%20Kab.%20Manokwari%20Selatan%2C%20Papua%20Bar.!5e0!3m2!1sid!2sid!4v1736828174167!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontak" class="section contact-section">
+        <h2 class="section-title">Hubungi Kami</h2>
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="nama">Nama</label>
+                    <input type="text" id="nama" name="nama" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="pesan">Pesan</label>
+                    <textarea id="pesan" name="pesan" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Kirim Pesan</button>
+            </form>
+            <div class="contact-info">
+                <h3>Informasi Kontak</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Kampung Demini, Distrik Momiwaren, Kabupaten Manokwari Selatan, Provinsi Papua Barat</p>
+                <p><i class="fas fa-phone"></i> +62 xxx xxxx xxxx</p>
+                <p><i class="fas fa-envelope"></i> info@kampungdemini.id</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Kampung Demini. Semua hak cipta dilindungi.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <div id="lightbox" class="lightbox-modal">
+        <button class="close-lightbox" title="Close">×</button>
+        <button class="lightbox-prev" title="Previous">←</button>
+        <button class="lightbox-next" title="Next">→</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Lightbox image">
+        </div>
+    </div>
+
+    <div class="scroll-progress"></div>
+
+    <div class="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Memuat...</p>
+        </div>
+    </div>
+
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</body>
+</html>

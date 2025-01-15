@@ -39,28 +39,26 @@ window.addEventListener('scroll', () => {
     document.querySelector('.scroll-progress').style.width = scrolled + '%';
 });
 
-window.addEventListener('load', () => {
-    const loader = document.querySelector('.loader');
-    loader.style.opacity = '0';
-    setTimeout(() => {
-        loader.style.display = 'none';
-    }, 500);
-});
-
 const observerOptions = {
-    threshold: 0.5
+    root: null,
+    threshold: 0.1,
+    rootMargin: '0px'
 };
 
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('fade-in');
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
     });
 }, observerOptions);
 
-document.querySelectorAll('.section').forEach(section => {
-    observer.observe(section);
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
 });
 
 // Fungsi untuk membuka lightbox
@@ -160,39 +158,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.querySelector('.modal-close');
     const modalBtn = document.querySelector('.modal-btn');
 
-    // Tampilkan modal setelah 2 detik halaman dimuat
-    setTimeout(() => {
-        modal.classList.add('active');
-        document.body.classList.add('modal-open');
-    }, 2000);
+    if (modal && closeBtn && modalBtn) {
+        // Tampilkan modal setelah 2 detik halaman dimuat
+        setTimeout(() => {
+            modal.style.display = 'block';
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }, 2000);
 
-    // Tutup modal saat tombol close diklik
-    closeBtn.onclick = () => {
-        modal.classList.remove('active');
-        document.body.classList.remove('modal-open');
-    };
-
-    // Tutup modal saat tombol "Jelajahi Sekarang" diklik
-    modalBtn.onclick = () => {
-        modal.classList.remove('active');
-        document.body.classList.remove('modal-open');
-    };
-
-    // Tutup modal saat mengklik di luar modal
-    window.onclick = (e) => {
-        if (e.target === modal) {
+        // Tutup modal saat tombol close diklik
+        closeBtn.onclick = () => {
+            modal.style.display = 'none';
             modal.classList.remove('active');
             document.body.classList.remove('modal-open');
-        }
-    };
+        };
 
-    // Tutup modal dengan tombol ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+        // Tutup modal saat tombol "Jelajahi Sekarang" diklik
+        modalBtn.onclick = () => {
+            modal.style.display = 'none';
             modal.classList.remove('active');
             document.body.classList.remove('modal-open');
-        }
-    });
+        };
+    }
 });
 
 // Navbar toggle functionality
@@ -225,4 +212,36 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.remove('active');
         }
     });
+});
+
+// Form submission handler
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.querySelector('.contact-form');
+    const toast = document.getElementById('toast');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Ambil data form
+            const formData = new FormData(contactForm);
+            const nama = formData.get('nama');
+            const email = formData.get('email');
+            const pesan = formData.get('pesan');
+
+            // Di sini Anda bisa menambahkan kode untuk mengirim data ke server
+            console.log('Data yang akan dikirim:', { nama, email, pesan });
+
+            // Reset form
+            contactForm.reset();
+
+            // Tampilkan toast notification
+            toast.classList.add('show');
+
+            // Hilangkan toast setelah 3 detik
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        });
+    }
 });

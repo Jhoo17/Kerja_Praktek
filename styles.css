@@ -896,7 +896,7 @@ body.modal-open {
 .toast.show {
     display: block;
 }
-
+ 
 .toast-content {
     display: flex;
     align-items: center;

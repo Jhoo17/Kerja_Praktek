@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Hilangkan toast setelah 3 detik
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000);
+            }, 3400);
         });
     }
 });

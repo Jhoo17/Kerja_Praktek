@@ -949,3 +949,58 @@ body.modal-open {
         opacity: 1;
     }
 } 
+
+/* Tambahkan styles untuk social media */
+.social-divider {
+    height: 1px;
+    background: rgba(74, 103, 65, 0.2);
+    margin: 2rem 0;
+}
+
+.social-links h4 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    background: var(--color-accent);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.social-icon i {
+    font-size: 1.2rem;
+}
+
+/* Responsive styles untuk social media */
+@media (max-width: 768px) {
+    .social-icons {
+        gap: 1rem;
+    }
+    
+    .social-icon {
+        width: 35px;
+        height: 35px;
+    }
+} 

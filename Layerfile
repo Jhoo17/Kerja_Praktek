@@ -1,0 +1,30 @@
+#This is an example webapp.io configuration for Next.js
+FROM vm/ubuntu:18.04
+
+# To note: Layerfiles create entire VMs, *not* containers!
+
+# Install node and npm
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install -g npm@latest
+
+# Install dependencies
+COPY . .
+RUN npm install
+
+# Setup environment variables
+SECRET ENV CONTENTFUL_SPACE_ID
+SECRET ENV CONTENTFUL_ACCESS_TOKEN
+SECRET ENV CONTENTFUL_MANAGEMENT_TOKEN
+SECRET ENV NEXTAUTH_SECRET
+SECRET ENV DATABASE_URL
+
+# Build the Next.js application
+RUN npm run build
+
+# Run tests (if you have them)
+RUN npm run test || true
+
+# Start the application and expose it on port 3000
+RUN BACKGROUND npm start
+EXPOSE WEBSITE http://localhost:3000

@@ -1,45 +1,23 @@
-#This is an example webapp.io configuration for Next.js
-FROM vm/ubuntu:22.04
+FROM vm/ubuntu:18.04
 
-# To note: Layerfiles create entire VMs, *not* containers!
-
-# Install the latest version of Docker, as in the official Docker installation instructions.
+# Install the latest version of Docker, as in the official Docker installation guide
 RUN apt-get update && \
     apt-get install -y ca-certificates curl gnupg lsb-release && \
     sudo mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-# Install Node.js 18
-RUN apt-get update && \
-    apt-get install -y ca-certificates curl gnupg && \
-    mkdir -p /etc/apt/keyrings && \
-    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list && \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     apt-get update && \
-    apt-get install -y nodejs && \
-    npm install -g npm@latest
+    apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # Copy files from the repository into this staging server
 COPY . .
 
-# Install project dependencies
-RUN npm install
+# Build the Docker image
+RUN docker build -t web-app .
 
-# Setup environment variables
-SECRET ENV CONTENTFUL_SPACE_ID
-SECRET ENV CONTENTFUL_ACCESS_TOKEN
-SECRET ENV CONTENTFUL_MANAGEMENT_TOKEN
-SECRET ENV NEXTAUTH_SECRET
-SECRET ENV DATABASE_URL
+# Run the container
+RUN docker run -d -p 80:80 web-app
 
-# Build the Next.js application
-RUN npm run build
-
-# Run tests (if you have them)
-RUN npm run test || true
-
-# Start the application and expose it on port 3000
-RUN BACKGROUND npm start
-EXPOSE WEBSITE http://localhost:3000
+# Expose the website
+EXPOSE WEBSITE http://localhost:80

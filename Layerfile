@@ -20,8 +20,8 @@ RUN docker run -d -p 80:80 web-app
 # Tunggu sampai container siap
 RUN sleep 10
 
-# Expose website
-EXPOSE WEBSITE http://localhost:80
-
 # Status deployment
-BUTTON Deploy To Production 
+BUTTON Deploy To Production
+
+# Expose website harus menjadi instruksi terakhir
+EXPOSE WEBSITE http://localhost:80 

@@ -2,4 +2,9 @@
 .gitignore
 README.md
 Dockerfile
-.dockerignore 
+.dockerignore
+node_modules
+.eslintrc
+.stylelintrc
+.htmlhintrc
+Layerfile 

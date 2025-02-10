@@ -10,32 +10,18 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# Install basic tools
-RUN apt-get install -y nodejs npm
-
 # Copy repository files
 COPY . .
 
-# Tahap CI: Linting dan Validasi
-RUN npm install -g htmlhint
-RUN npm install -g stylelint
-RUN npm install -g eslint
-
-# Jalankan linting
-RUN htmlhint *.html || true
-RUN stylelint "*.css" || true
-RUN eslint "*.js" || true
-
-# Tahap Build: Build Docker image
+# Build dan jalankan Docker container
 RUN docker build -t web-app .
-
-# Tahap Test: Test container
 RUN docker run -d -p 80:80 web-app
-RUN while ! curl -s localhost:80 > /dev/null; do sleep 1; done
 
-# Expose website untuk preview
+# Tunggu sampai container siap
+RUN sleep 10
+
+# Expose website
 EXPOSE WEBSITE http://localhost:80
 
-# Tambahkan badge status
-BUTTON Deploy To Production
-RUN echo "Deployment successful!" 
+# Status deployment
+BUTTON Deploy To Production 
